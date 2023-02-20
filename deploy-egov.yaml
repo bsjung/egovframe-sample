@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: egov
+  labels:
+    app: egov
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: egov
+  template:
+    metadata:
+      labels:
+        app: egov
+    spec:
+      containers:
+      - name: egov
+        image: registry-1.docker.io/bsjung/egov:latest
+        resources : 
+          limits:
+            memory: "500Mi"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+      imagePullSecrets:
+      - name: regcred
